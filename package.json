@@ -1,0 +1,37 @@
+{
+  "name": "image-color-utils",
+  "version": "1.0.7",
+  "description": "通过`canvas`操作图片，提供`提取色值`、`色值相识度对比`、`色彩边界值计算`等能力",
+  "main": "./build/index.js",
+  "module": "./build/index.es.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx rollup -c"
+  },
+  "author": "AwesomeDevin <awesomedevin.deng@gmail.com>",
+  "license": "MIT",
+  "files": [
+    "build/"
+  ],
+  "keywords":["pick","color","compare","pick color","Color similarity"],
+  "dependencies": {
+  },
+  "repository":"https://github.com/AwesomeDevin/ImageColorUtils",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.17.0",
+    "@typescript-eslint/parser": "^4.17.0",
+    "eslint": "^7.22.0",
+    "rollup": "^2.41.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-polyfill": "^3.0.0",
+    "rollup-plugin-serve": "^1.1.0",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "tslib": "^2.1.0",
+    "tslint": "^6.1.3",
+    "typescript": "^4.2.3"
+  },
+  "eslintIgnore": [
+    "index.html",
+    ".eslintrc.js"
+  ]
+}
