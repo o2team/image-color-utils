@@ -1,5 +1,6 @@
 import polyfill from 'rollup-plugin-polyfill'
 import typescript from 'rollup-plugin-typescript2';
+import serve from 'rollup-plugin-serve'
 import commonjs from 'rollup-plugin-commonjs'
 
 let defaults = { compilerOptions: { declaration: true } };
@@ -13,6 +14,9 @@ const plugins = [
   }),
   commonjs(),
   polyfill(['./imageColorUtils.ts']),
+  serve({
+    open: true
+  })
 ]
 
 export default {
