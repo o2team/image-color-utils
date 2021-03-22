@@ -1,7 +1,7 @@
 # image-color-utils
 
 ## DESC
-提供`取色`、`色值相似度对比`、`色彩边界值计算`等能力。
+提供`取色`、`色值相似度对比`、`色彩边界值计算`等能力。  
 ### [demo](http://47.105.188.15:3002/)
 ### [codesandbox](https://codesandbox.io/s/image-color-utils-ghrvb)
 ![](https://raw.githubusercontent.com/o2team/image-color-utils/main/static/demo4.gif)
@@ -12,6 +12,7 @@
 - [adjust](#-adjust---色彩边界值计算)
 - [hex2rgb](#-hex2rgb---hex色值转rgb色值)
 - [rgb2hex](#-rgb2hex---rgb色值转hex色值)
+- 待开发(图片自动抓取、截图)
 
 ## Install
 ```
@@ -77,14 +78,15 @@ Desc  | Type
 import { ImageColorUtils } from 'image-color-utils'
 
 const imageColorUtils = new ImageColorUtils({ leftTopPosition, rightBottomPosition })
-const ctx = canvas.getContext('2d')
-const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-const res = imageColorUtils.adjust(imageData, canvas.width)
+const img = new Image()
+img.onload = () => {
+  const res = imageColorUtils.adjust(img, canvas.width, canvas.height)
+}
 ```
 ##### Arguments
 Name  | Desc  | Type | Default | required
 -------- | -------- | -------- | -------- | -----
-imageData | canvasImageData | ImageData | - | true
+img | img or imagebitmap | HTMLImageElement | ImageBitmap | - | true
 width | 画布宽度 | number | - | true
 ##### Returns
 Desc  | Type 
