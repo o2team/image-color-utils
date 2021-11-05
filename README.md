@@ -1,4 +1,5 @@
 # image-color-utils
+Image color manipulation tool
 
 ## DESC
 提供`取色`、`色值相似度对比`、`色彩边界值计算`等能力。  
