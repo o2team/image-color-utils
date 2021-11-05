@@ -353,20 +353,24 @@ export class ImageColorUtils {
 
   // 智能吸附后坐标
   public adjust(leftTopPosition: number[], rightBottomPosition: number[]): {x: number, y: number, width: number, height: number} {
-    // const params = Object.assign({origin: this.origin, width: ImageColorUtils.width, height: ImageColorUtils.height}, ImageColorUtils.mockMovePx && {mockMovePx: ImageColorUtils.mockMovePx}, ImageColorUtils.boundaryValue && {boundaryValue: ImageColorUtils.boundaryValue} )
-    // const adjust = new ImageColorUtils(params)
     if( !leftTopPosition.length || !rightBottomPosition.length){
       throw new Error('Position is invalid！')
     }
-    const originColorMedia = this.pickLineColor({leftTopPosition, rightBottomPosition }) // 初始rgb值
-    const adjustLeftTopPosition = this.leftTopMockMove({ originColorMedia, leftTopPosition, rightBottomPosition }) // 修正后左上角坐标
-    const adjustRightBottomPosition = this.rightBottomMockMove({ originColorMedia, leftTopPosition, rightBottomPosition }) // 修正后右下角坐标
+    // 初始rgb值
+    const originColorMedia = this.pickLineColor({leftTopPosition, rightBottomPosition }) 
+
+    // 获取修正后左上角坐标
+    const adjustLeftTopPosition = this.leftTopMockMove({ originColorMedia, leftTopPosition, rightBottomPosition }) 
+
+    // 修正后右下角坐标
+    const adjustRightBottomPosition = this.rightBottomMockMove({ originColorMedia, leftTopPosition, rightBottomPosition }) 
     const adjustWidth = adjustRightBottomPosition[0] - adjustLeftTopPosition[0] // 修正后width
     const adjustHeight = adjustRightBottomPosition[1] - adjustLeftTopPosition[1] // 修正后height
 
     const x = adjustLeftTopPosition[0] 
     const y = adjustLeftTopPosition[1]
 
+    // 返回吸附后坐标
     return {
       x,y,width: adjustWidth, height : adjustHeight
     }
