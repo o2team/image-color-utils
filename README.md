@@ -1,7 +1,4 @@
 # image-color-utils
-Image color manipulation tool
-
-## DESC
 基于欧式距离公式及图片色值量化算法提供`取色`、`色值相似度对比`、`色彩边界检测`等能力。  
 
 ![](https://github.com/AwesomeDevin/ImageColorUtils/blob/master/assets/image-color-utils.gif?raw=true)
