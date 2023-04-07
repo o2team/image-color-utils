@@ -2,8 +2,11 @@
 Image color manipulation tool
 
 ## DESC
-基于欧式距离公式及图片色值量化算法提供`取色`、`色值相似度对比`、`色彩边缘计算`等能力。  
-### [demo](http://175.24.232.69:8080/ImageColorUtils/index.html)
+基于欧式距离公式及图片色值量化算法提供`取色`、`色值相似度对比`、`色彩边界检测`等能力。  
+
+![](https://github.com/AwesomeDevin/ImageColorUtils/blob/master/assets/image-color-utils.gif?raw=true)
+
+### [demo](https://awesomedevin.github.io/ImageColorUtils/)
 ### [codesandbox](https://codesandbox.io/s/image-color-utils-ghrvb)
 ![](https://raw.githubusercontent.com/o2team/image-color-utils/main/static/demo4.gif)
 
@@ -25,8 +28,9 @@ const { ImageColorUtils } = require('image-color-utils')
 
 ## API
 - [ImageColorUtils](#-imagecolorutils)
-- [pickColor](#-pickcolor---提取色值)
-- [adjust](#-adjust---色彩边界值计算)
+- [pickColor](#-pickcolor---提取单个色值)
+- [pickColors](#-pickcolors---提取图片色值)
+- [adjust](#-adjust---色彩边缘计算)
 - [compare](#-compare---色值相似度对比)
 - [hex2rgb](#-hex2rgb---hex色值转rgb色值)
 - [rgb2hex](#-rgb2hex---rgb色值转hex色值)
@@ -41,7 +45,8 @@ const params = {
   width: canvas.width,
   height: canvas.height,
   boundaryValue,
-  mockMovePx
+  mockMovePx,
+  onload,
 }
 const imageColorUtils = new ImageColorUtils(params)
 ```
@@ -53,12 +58,13 @@ width | 画板宽度 | number | - | false (不传参将根据图片宽高自适�
 height | 画板高度 | number | - | false (不传参将根据图片宽高自适应，origin 为 ImageBitmap / HTMLImageElemen，必填)
 mockMovePx |  边界扫描距离（最大边界扫描距离, 扫描方向由内向外） | number | 30 | false
 boundaryValue | 色彩边界阈值（作用于色值相似度对比, 阈值越高，相似条件越高） | number | 10 | false
+onload | 加载完成 | ()=>void | - | false
 ##### Returns
 Desc  | Type 
 -------- | -------- 
 ImageColorUtils实例 | Object
 
-### \# pickColor - 提取色值 
+### \# pickColor - 提取单个色值 
 ```javascript
 import { ImageColorUtils } from 'image-color-utils'
 
@@ -81,7 +87,26 @@ Desc  | Type
 -------- | -------- 
 目标点 rgb 色值 | number[] 
 
-### \# adjust - 色彩边界值计算
+### \# pickColors - 提取图片色值
+```javascript
+import { ImageColorUtils } from 'image-color-utils'
+
+
+const imageColorUtils = new ImageColorUtils({
+  origin: img,
+  width: canvas.width,
+  height: canvas.height
+})
+const res = imageColorUtils.pickColors()
+```
+##### Returns
+##### Returns
+Desc  | Type 
+-------- | -------- 
+图片色值 | {rgb: string[], hex: string[]  }
+
+
+### \# adjust - 色彩边缘计算
 ```javascript
 import { ImageColorUtils } from 'image-color-utils'
 
@@ -109,7 +134,7 @@ Desc  | Type
 ```javascript
 import { ImageColorUtils } from 'image-color-utils'
 
-const res = ImageColorUtils.compare(color1, color2, boundaryValue)
+const res = ImageColorUtils.compare(color1, color2, boundaryValue, type)
 ```
 ##### Arguments
 Name  | Desc  | Type | Default | required
@@ -117,7 +142,7 @@ Name  | Desc  | Type | Default | required
 color1 | rgb 色值1 | number[] | - | true
 color2 | rgb 色值2 | number[] | - | true
 boundaryValue | 色彩边界阈值（作用于色值相似度对比, 阈值越高，相似条件越高） | number | 10 | false
-
+type | 颜色模型 | 'rgb' or 'lab' | 'rgb' | true
 ##### Returns
 Desc  | Type 
 -------- | -------- 
@@ -125,9 +150,9 @@ Desc  | Type
 
 ### \# hex2rgb - HEX色值转RGB色值
 ```javascript
-import { ImageColorUtils } from 'image-color-utils'
+import { hex2rgb } from 'image-color-utils'
 
-const rgb = ImageColorUtils.hex2rgb(hex)
+const rgb = hex2rgb(hex)
 ```
 ##### Arguments
 Name  | Desc  | Type | Default | required
@@ -141,9 +166,9 @@ RGB色值 | number[]
 
 ### \# rgb2hex - RGB色值转HEX色值
 ```javascript
-import { ImageColorUtils } from 'image-color-utils'
+import { rgb2hex } from 'image-color-utils'
 
-const hex = ImageColorUtils.rgb2hex(rgb)
+const hex = rgb2hex(rgb)
 ```
 ##### Arguments
 Name  | Desc  | Type | Default | required
